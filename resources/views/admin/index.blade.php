@@ -41,12 +41,14 @@
 <main id="app" class="container">
 
     <header>
-        <div class="px-3 py-2 bg-dark text-white">
+        <div class="px-2 py-2 bg-dark text-white">
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <h3 class="text-white">Панель управления</h3>
-                    <ul class="nav col-12 col-lg-auto my-0 justify-content-center my-md-0 text-small">
-                        <navbar></navbar>
+                    <ul class="nav px-3 mb-2 justify-content-center mb-md-0">
+                        <li >
+                            <navbar></navbar>
+                        </li>
                         <li class="mx-3">
                             <a href="{{ route('disk.index')}}" class="text-white text-decoration-none">
                                 <i class="bi-device-hdd-fill text-white"></i>

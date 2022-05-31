@@ -5301,6 +5301,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Navbar"
 });
@@ -5392,29 +5397,47 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: [{
-    path: '/admin/index/users',
+    path: '/admin/users',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_User_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/Index */ "./resources/js/components/User/Index.vue"));
     },
     name: 'user.index'
   }, {
-    path: '/admin/index/users/create',
+    path: '/admin/users/create',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_User_Create_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/Create */ "./resources/js/components/User/Create.vue"));
     },
     name: 'user.create'
   }, {
-    path: '/admin/index/users/edit/:user',
+    path: '/admin/users/edit/:user',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_User_Edit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/Edit */ "./resources/js/components/User/Edit.vue"));
     },
     name: 'user.edit'
   }, {
-    path: '/admin/index/users/show/:user',
+    path: '/admin/users/show/:user',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_User_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/Show */ "./resources/js/components/User/Show.vue"));
     },
     name: 'user.show'
+  }, {
+    path: '/admin/files',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_File_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/File/Index */ "./resources/js/components/File/Index.vue"));
+    },
+    name: 'file.index'
+  }, {
+    path: '/admin/files/create',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_File_Create_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/File/Create */ "./resources/js/components/File/Create.vue"));
+    },
+    name: 'file.create'
+  }, {
+    path: '/admin/files/show/:file',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_File_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/File/Show */ "./resources/js/components/File/Show.vue"));
+    },
+    name: 'file.show'
   }]
 }));
 
@@ -28051,7 +28074,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("ul", { staticClass: "nav mb-2 justify-content-center mb-md-0" }, [
     _c(
       "li",
       { staticClass: "mx-3" },
@@ -28063,8 +28086,27 @@ var render = function () {
             attrs: { to: { name: "user.index" } },
           },
           [
-            _c("i", { staticClass: "bi bi-person text-white" }),
+            _c("i", { staticClass: "bi-person text-white" }),
             _vm._v("\n            Пользователи\n        "),
+          ]
+        ),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "li",
+      { staticClass: "mx-3" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "text-decoration-none text-white",
+            attrs: { to: { name: "file.index" } },
+          },
+          [
+            _c("i", { staticClass: "bi-files text-white" }),
+            _vm._v("\n            Файлы\n        "),
           ]
         ),
       ],
@@ -43521,7 +43563,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_User_Index_vue":1,"resources_js_components_User_Create_vue":1,"resources_js_components_User_Edit_vue":1,"resources_js_components_User_Show_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_User_Index_vue":1,"resources_js_components_User_Create_vue":1,"resources_js_components_User_Edit_vue":1,"resources_js_components_User_Show_vue":1,"resources_js_components_File_Index_vue":1,"resources_js_components_File_Create_vue":1,"resources_js_components_File_Show_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

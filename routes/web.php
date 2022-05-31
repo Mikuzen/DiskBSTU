@@ -45,5 +45,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::namespace('Admin')->name('admin.')->prefix('admin')->middleware(['auth', 'verified'])
     ->group(function () {
-    Route::get('index/{any?}', 'IndexController')->where('any', '.*')->name('index');
+    Route::get('{any?}', 'IndexController')->where('any', '.*')->name('index');
 });
