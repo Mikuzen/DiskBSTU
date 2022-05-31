@@ -4,16 +4,13 @@
         $link = str_replace('/','',Hash::make($file->src . Carbon\Carbon::now()->timestamp . $file->ext));
     @endphp
     <div class="col-md-1 m-3 text-center">
-
         <div class="h-auto w-auto align-middle p-auto position-relative">
             <div style="height: 20px">
-                <a href="" class="position-absolute top-0 end-0 text-dark" type="button" id="dropdownCenterBtn"
+                <a class="position-absolute top-0 end-0 text-dark" type="button" id="dropdownCenterBtn"
                    data-bs-toggle="dropdown" aria-expanded="false" aria-current="page">
-                    <svg class="bi pe-none me-2 " width="25" height="25">
-                        <use xlink:href="#dots"></use>
-                    </svg>
+                    <i class="bi-three-dots"></i>
                 </a>
-                <ul class="dropdown-menu text-center rounded-1">
+                <ul class="dropdown-menu text-center rounded-1" aria-labelledby="dropdownCenterBtn">
                     <li class="p-0 m-0">
                         @isset($file->link->link)
                             <input type="hidden" id="{{ $file->id }}"

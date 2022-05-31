@@ -2,7 +2,6 @@
 
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 
 /*
@@ -21,7 +20,7 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::name('disk.')->prefix('disk')
-    ->middleware('auth')->group(function () {
+    ->middleware(['auth', 'verified'])->group(function () {
         Route::get('index', 'DiskController@index')->name('index');
         Route::get('trash', 'DiskController@trash')->name('trash');
         Route::get('filter/{type}', 'DiskController@filter')->name('filter');
@@ -40,6 +39,11 @@ Route::name('disk.')->prefix('disk')
 Route::get('show/{id}', 'DiskController@show')->name('show');
 Route::get('download/{id}/token/{token}','DiskController@download')->name('download');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::namespace('Admin')->name('admin.')->prefix('admin')->middleware(['auth', 'verified'])
+    ->group(function () {
+    Route::get('index/{any?}', 'IndexController')->where('any', '.*')->name('index');
+});

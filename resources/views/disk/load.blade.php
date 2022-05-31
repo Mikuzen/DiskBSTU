@@ -6,10 +6,11 @@
             {{ trim(stristr(stristr(session('errors'), '['), ']', true), '[') }}
         </div>
     @endif
-
+    <h2>
+        Загрузка файла
+    </h2>
     <form enctype="multipart/form-data" action="{{ route('disk.store') }}" class="m-2" method="post">
         @csrf
-        {{--        <label class="text-danger">Загрузка несколькиx файлов в процессе разработки!</label><br>--}}
         <input multiple="multiple" type="file" name="files[]" class="form-control-file">
         <button type="submit" class="btn btn-primary">Добавить</button>
     </form>

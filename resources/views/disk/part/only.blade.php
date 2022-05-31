@@ -1,4 +1,3 @@
-
 <div class="row mx-auto">
     @include('disk.part.files_index')
 </div>
@@ -7,7 +6,7 @@
 </div>
 
 
-<script type="text/javascript">
+<script type="application/javascript">
     function copyToClipboard(id) {
         let url = document.getElementById(id).value;
         const el = document.createElement('textarea');

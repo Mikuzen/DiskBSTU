@@ -13,7 +13,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                        {{ __('You are logged in!') }}
                 </div>
             </div>
             <a href="{{ route('disk.index') }}" class="btn btn-primary">Go to disk</a>

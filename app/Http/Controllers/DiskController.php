@@ -5,18 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FileRequest;
 use App\Models\File;
 use App\Models\FileLink;
-use App\Models\User;
 use Auth;
 use Carbon\Carbon;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-
 
 class DiskController extends Controller
 {
@@ -24,11 +17,6 @@ class DiskController extends Controller
     private $videoMimes = ['video/mpeg', 'video/mp4', 'video/x-msvideo'];
     private $audioMimes = ['audio/mpeg', 'video/mp4', 'video/wnd.wave'];
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function index()
     {
         $files = File::where('user_id', Auth::id())->with('link')->orderByDesc('updated_at')->paginate(45);
@@ -50,22 +38,11 @@ class DiskController extends Controller
         return view('disk.' . $type)->withFiles($files);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View|Response
-     */
     public function create()
     {
         return view('disk.load');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function store(FileRequest $request)
     {
         $dataRequest = $this->getDataRequest($request);

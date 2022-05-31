@@ -12,9 +12,7 @@
     <div class="align-middle text-center mx-auto">
         {{ $files->links() }}
     </div>
-
-
-    <script type="text/javascript">
+    <script type="application/javascript">
         function copyToClipboard(id) {
             let url = document.getElementById(id).value;
             const el = document.createElement('textarea');

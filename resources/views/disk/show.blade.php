@@ -4,7 +4,7 @@
     <div class="text-center p-3">
         @switch($file->type)
             @case('image')
-            <img src="{{ $url }}" alt="" class="h-75">
+            <img src="{{ $url }}" alt="" class="h-50 w-50">
             @break
             @case('video')
             <video controls>

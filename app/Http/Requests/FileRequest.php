@@ -29,7 +29,8 @@ class FileRequest extends FormRequest
     public function rules()
     {
         return [
-            'files.*' => 'required|file|mimes:.' . implode(',', $this->allMimes)
+            'files' => 'required',
+            'files.*' => 'max:2048|file|mimes:.' . implode(',', $this->allMimes)
         ];
     }
 
