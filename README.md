@@ -1,4 +1,4 @@
-<p align="center"><a href="https://www.bstu.ru/" target="_blank"><img src="https://www.bstu.ru/static/images/logo.png" width="400"></a></p>
+<p align="center"><a href="https://www.bstu.ru/" target="_blank"><img src="https://www.bstu.ru/static/images/logo.png" width="200"></a></p>
 
 
 ## About project
