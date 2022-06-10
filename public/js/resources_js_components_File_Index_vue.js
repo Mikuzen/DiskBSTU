@@ -220,7 +220,7 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("h1", [_vm._v("Все пользователи Диск.БГТУ")]),
+      _c("h1", [_vm._v("Все файлы Диск.БГТУ")]),
       _vm._v(" "),
       _c(
         "router-link",

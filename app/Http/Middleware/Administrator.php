@@ -17,7 +17,6 @@ class Administrator
      */
     public function handle(Request $request, Closure $next)
     {
-
         return Auth::user()->admin ?  $next($request) : abort(404);
     }
 }

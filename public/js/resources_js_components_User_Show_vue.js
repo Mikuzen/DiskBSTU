@@ -121,8 +121,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteUser: function deleteUser(user) {
-      axios["delete"]("/api/V1/users/" + user).then(function (res) {
-        _router__WEBPACK_IMPORTED_MODULE_1__["default"].push('user.index');
+      axios["delete"]("/api/V1/users/" + user).then(function () {
+        _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
+          name: 'user.index'
+        });
         alert('Пользователь был удален');
       });
     }
@@ -893,7 +895,7 @@ var render = function () {
                   [
                     _c("input", {
                       staticClass: "btn btn-danger",
-                      attrs: { value: "Удалить пользователя" },
+                      attrs: { type: "button", value: "Удалить пользователя" },
                     }),
                   ]
                 ),

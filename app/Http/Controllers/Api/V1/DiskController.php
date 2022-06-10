@@ -25,53 +25,53 @@ class DiskController extends Controller
 
     public function store(FileStoreRequest $request)
     {
+        if (!$request->hasFile('files')) {
+            return response()->json(['message' => 'File not found'], 404);
+        }
+
         $validated = $request->validated();
         $user = User::findOrFail($validated['user_id']);
-        $files = $request->file('files');
         $filesList = [];
-        if ($user && $files) {
+
+        if ($user) {
             $dataRequest = $this->getDataRequest($user->id);
-            foreach ($files as $file) {
 
-            $dataForDB = $this->getDataForDB($user->name, $file);
-            if (!Storage::disk('public')->has('files/' . $user->id
-                . '/' . $dataRequest['folder'] . '/resize')) {
-                Storage::disk('public')->makeDirectory('files/' . $user->id
-                    . '/' . $dataRequest['folder'] . '/resize');
-            }
+            foreach ($request->file('files') as $file) {
 
-            if ($dataForDB['type'] == 'image') {
-                Image::make($file)->resize(250, 250)
-                    ->save($dataRequest['folderResize'] . '/' . $dataForDB['src']);
-            }
+                $dataForDB = $this->getDataForDB($user->name, $file);
 
-            Storage::putFileAs($dataRequest['folderOriginal'], $file, $dataForDB['src']);
+                if (!Storage::disk('public')->has('files/' . $user->id
+                    . '/' . $dataRequest['folder'] . '/resize')) {
+                    Storage::disk('public')->makeDirectory('files/' . $user->id
+                        . '/' . $dataRequest['folder'] . '/resize');
+                }
 
-            $filesList[] = File::create([
-                'user_id' => $user->id,
-                'src' => $dataForDB['src'],
-                'ext' => $dataForDB['ext'],
-                'title' => $dataForDB['title'],
-                'size' => $dataForDB['size'],
-                'type' => $dataForDB['type'],
-                'private' => true,
-                'folder' => $dataRequest['folder']
-            ]);
+                if ($dataForDB['type'] == 'image') {
+                    Image::make($file)->resize(250, 250)
+                        ->save($dataRequest['folderResize'] . '/' . $dataForDB['src']);
+                }
+
+                Storage::putFileAs($dataRequest['folderOriginal'], $file, $dataForDB['src']);
+
+                $filesList[] = File::create([
+                    'user_id' => $user->id,
+                    'src' => $dataForDB['src'],
+                    'ext' => $dataForDB['ext'],
+                    'title' => $dataForDB['title'],
+                    'size' => $dataForDB['size'],
+                    'type' => $dataForDB['type'],
+                    'private' => true,
+                    'folder' => $dataRequest['folder']
+                ]);
             }
 
             return FileResource::collection($filesList);
         } else return response()->json(['message' => 'Пользователь не найден или файл не загружен'], 404);
-
     }
 
     public function show($file)
     {
         return new FileResource(File::withTrashed()->with('link')->findOrFail($file));
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     public function destroy($id)
@@ -87,13 +87,13 @@ class DiskController extends Controller
 
         $file->forceDelete();
 
-        return response()->json(['message' => 'Файл был успешно удален'], 200);
+        return response()->json([], 204);
     }
 
     private function getDataRequest($user)
     {
         $folder = Carbon::now()->toDateString();
-        $folderResize = 'storage/files/' . $user . '/' . $folder . '/resize';
+        $folderResize = public_path('storage/files/' . $user . '/' . $folder . '/resize');
         $folderOriginal = 'public/files/' . $user . '/' . $folder;
 
         return [

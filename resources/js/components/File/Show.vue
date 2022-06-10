@@ -48,7 +48,7 @@
                         <input  class="btn btn-primary" value="Просмотреть данные пользователя" style="width: 275px">
                     </router-link>
                     <a href="#" @click.prevent="deleteFile(file.id)">
-                        <input class="btn btn-danger" value="Удалить файл">
+                        <input type="button" class="btn btn-danger" value="Удалить файл">
                     </a>
                 </p>
             </div>

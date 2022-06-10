@@ -319,7 +319,7 @@ var render = function () {
                   [
                     _c("input", {
                       staticClass: "btn btn-danger",
-                      attrs: { value: "Удалить файл" },
+                      attrs: { type: "button", value: "Удалить файл" },
                     }),
                   ]
                 ),

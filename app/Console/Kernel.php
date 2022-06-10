@@ -28,8 +28,7 @@ class Kernel extends ConsoleKernel
                 Storage::disk('public')->delete($url . $file->src);
                 $file->forceDelete();
             }
-        })->dailyAt( '09:15')->timezone('Europe/Moscow');
-        // $schedule->command('inspire')->hourly();
+        })->monthly()->timezone('Europe/Moscow');
     }
 
     /**

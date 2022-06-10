@@ -43,7 +43,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::namespace('Admin')->name('admin.')->prefix('admin')->middleware(['auth', 'verified'])
+Route::namespace('Admin')->name('admin.')->prefix('admin')->middleware(['auth', 'admin'])
     ->group(function () {
     Route::get('{any?}', 'IndexController')->where('any', '.*')->name('index');
 });

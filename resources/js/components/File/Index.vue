@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Все пользователи Диск.БГТУ</h1>
+        <h1>Все файлы Диск.БГТУ</h1>
 
         <router-link :to="{ name: 'file.create' }" class="btn btn-success m-2">Добавить файл</router-link>
 

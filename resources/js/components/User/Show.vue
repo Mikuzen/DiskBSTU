@@ -24,7 +24,7 @@
                 </router-link>
 
                 <a href="#" @click.prevent="deleteUser(user.id)">
-                    <input class="btn btn-danger" value="Удалить пользователя">
+                    <input type="button" class="btn btn-danger" value="Удалить пользователя">
                 </a>
             </p>
         </div>
@@ -56,14 +56,14 @@ export default {
             axios.get('/api/V1/users/' + this.$route.params.user)
                 .then(res => {
                     this.user = res.data.data;
-                    this.files = res.data.data.files
+                    this.files = res.data.data.files;
                 })
         },
 
         deleteUser(user) {
             axios.delete(`/api/V1/users/` + user)
-                .then(res => {
-                    router.push('user.index')
+                .then(function (){
+                    router.push({name: 'user.index'})
                     alert('Пользователь был удален')
                 })
         }
