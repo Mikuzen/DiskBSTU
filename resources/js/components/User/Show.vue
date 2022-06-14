@@ -23,7 +23,7 @@
                     <input  class="btn btn-primary" value="Изменить данные пользователя" style="width: 250px">
                 </router-link>
 
-                <a href="#" @click.prevent="deleteUser(user.id)">
+                <a href="#" v-if="user.id !== 1" @click.prevent="deleteUser(user.id)">
                     <input type="button" class="btn btn-danger" value="Удалить пользователя">
                 </a>
             </p>

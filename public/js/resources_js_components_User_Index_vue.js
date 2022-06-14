@@ -291,19 +291,25 @@ var render = function () {
                     ),
                     _vm._v(" "),
                     _c("td", [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function ($event) {
-                              $event.preventDefault()
-                              return _vm.deleteUser(user.id)
+                      user.id !== 1
+                        ? _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.deleteUser(user.id)
+                                },
+                              },
                             },
-                          },
-                        },
-                        [_c("i", { staticClass: "bi-trash-fill text-danger" })]
-                      ),
+                            [
+                              _c("i", {
+                                staticClass: "bi-trash-fill text-danger",
+                              }),
+                            ]
+                          )
+                        : _vm._e(),
                     ]),
                   ]),
                 ]

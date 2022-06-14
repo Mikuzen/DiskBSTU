@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class DiskControllerTest extends TestCase
@@ -16,6 +17,7 @@ class DiskControllerTest extends TestCase
      */
     public function test_api_get_all_files()
     {
+        $this->apiToken();
         $this->getJson('api/V1/files')
             ->assertStatus(200)
             ->assertJsonStructure([
@@ -39,6 +41,7 @@ class DiskControllerTest extends TestCase
 
     public function test_api_upload_image()
     {
+        $this->apiToken();
         $user_id = User::latest()->first()->id;
         $file = UploadedFile::fake()->image('image.png', 500, 500)->size(100);
         $response = $this->postJson('/api/V1/files', [
@@ -83,6 +86,7 @@ class DiskControllerTest extends TestCase
 
     public function test_api_upload_file()
     {
+        $this->apiToken();
         $user_id = User::latest()->first()->id;
         $file = UploadedFile::fake()->create('audio.mp3', 500, 'audio/mp3');
         $response = $this->postJson('/api/V1/files', [
@@ -127,6 +131,7 @@ class DiskControllerTest extends TestCase
 
     public function test_api_upload_several_files()
     {
+        $this->apiToken();
         $user_id = User::latest()->first()->id;
         $file = [
             UploadedFile::fake()->create('audio.mp3', 500, 'audio/mp3'),
@@ -178,6 +183,7 @@ class DiskControllerTest extends TestCase
 
     public function test_api_show_file()
     {
+        $this->apiToken();
         $user_id = User::latest()->first()->id;
         $file = UploadedFile::fake()->create('audio.mp3', 500, 'audio/mp3');
         $response = $this->postJson('/api/V1/files', [
@@ -208,6 +214,7 @@ class DiskControllerTest extends TestCase
 
     public function test_api_destroy_file()
     {
+        $this->apiToken();
         $user_id = User::latest()->first()->id;
         $file = UploadedFile::fake()->create('audio.mp3', 500, 'audio/mp3');
         $response = $this->postJson('/api/V1/files', [
@@ -227,6 +234,7 @@ class DiskControllerTest extends TestCase
 
     public function test_api_store_missing_file()
     {
+        $this->apiToken();
         $this->postJson('/api/V1/files', [
             'user_id' => User::first()->id,
             'files' => [],
@@ -237,6 +245,7 @@ class DiskControllerTest extends TestCase
 
     public function test_api_store_not_valid_mime_type_file()
     {
+        $this->apiToken();
         $file = UploadedFile::fake()->create('document.bmp', 1000, 'application/ogg');
         $this->postJson('/api/V1/files', [
             'user_id' => User::first()->id,
@@ -248,6 +257,7 @@ class DiskControllerTest extends TestCase
 
     public function test_api_store_file_with_size_more_than_max()
     {
+        $this->apiToken();
         $file = UploadedFile::fake()->create('document.pdf', 2049, 'application/pdf');
         $this->postJson('/api/V1/files', [
             'user_id' => User::first()->id,
@@ -259,6 +269,7 @@ class DiskControllerTest extends TestCase
 
     public function test_api_show_missing_file()
     {
+        $this->apiToken();
         $this->getJson('/api/V1/files/0')
             ->assertNotFound()
             ->assertJsonStructure(['exception']);
@@ -266,8 +277,17 @@ class DiskControllerTest extends TestCase
 
     public function test_api_destroy_missing_file()
     {
+        $this->apiToken();
         $this->deleteJson('/api/V1/files/0')
             ->assertNotFound()
             ->assertJsonStructure(['exception']);
+    }
+
+    private function apiToken()
+    {
+        return Sanctum::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
     }
 }

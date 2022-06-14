@@ -7,9 +7,6 @@ use App\Http\Requests\Api\User\UserUpdateRequest;
 use App\Http\Requests\Api\User\UserStoreRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -47,6 +44,10 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        if ($user->admin) {
+            return response()->json(['message' => 'Этот пользователь не может быть удален'], 400);
+        }
+
         if (Storage::disk('public')->has('files/' . $user->id)) {
             Storage::disk('public')->deleteDirectory('files/' . $user->id);
         }

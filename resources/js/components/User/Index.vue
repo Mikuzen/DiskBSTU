@@ -33,7 +33,7 @@
                         </router-link>
                     </td>
                     <td>
-                        <a href="#" @click.prevent="deleteUser(user.id)">
+                        <a href="#" v-if="user.id !== 1" @click.prevent="deleteUser(user.id)">
                             <i class="bi-trash-fill text-danger"></i>
                         </a>
                     </td>

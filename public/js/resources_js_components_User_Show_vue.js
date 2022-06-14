@@ -881,24 +881,29 @@ var render = function () {
                   ]
                 ),
                 _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "#" },
-                    on: {
-                      click: function ($event) {
-                        $event.preventDefault()
-                        return _vm.deleteUser(_vm.user.id)
+                _vm.user.id !== 1
+                  ? _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.deleteUser(_vm.user.id)
+                          },
+                        },
                       },
-                    },
-                  },
-                  [
-                    _c("input", {
-                      staticClass: "btn btn-danger",
-                      attrs: { type: "button", value: "Удалить пользователя" },
-                    }),
-                  ]
-                ),
+                      [
+                        _c("input", {
+                          staticClass: "btn btn-danger",
+                          attrs: {
+                            type: "button",
+                            value: "Удалить пользователя",
+                          },
+                        }),
+                      ]
+                    )
+                  : _vm._e(),
               ],
               1
             ),
